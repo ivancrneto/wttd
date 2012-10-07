@@ -34,17 +34,17 @@ class SubscriptionTest(TestCase):
 class SubscriptionUniqueTest(TestCase):
     def setUp(self):
         # Create a first entry to force the collision
-        Subscription.objects.create(name='Ivan Rocha', cpf='012345678901',
+        Subscription.objects.create(name='Ivan Rocha', cpf='12345678901',
             email='ivan.cr.neto@gmail.com', phone='8487598888')
 
     def test_cpf_unique(self):
         'CPF must be unique'
-        s = Subscription(name='Ivan Rocha', cpf='012345678901',
+        s = Subscription(name='Ivan Rocha', cpf='12345678901',
             email='ivancrneto@gmail.com', phone='8487598888')
         self.assertRaises(IntegrityError, s.save)
 
-    def test_email_unique(self):
-        'Email must be unique'
-        s = Subscription(name='Ivan Rocha', cpf='109876543210',
+    def test_email_can_repeat(self):
+        'Email is not unique anymore'
+        s = Subscription.objects.create(name='Ivan Rocha', cpf='10987654321',
             email='ivan.cr.neto@gmail.com', phone='8487598888')
-        self.assertRaises(IntegrityError, s.save)
+        self.assertEqual(2, s.pk)
