@@ -10,7 +10,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
 
     {% block header %}
-    {% endblock %}
+    {% endblock header %}
 
     <title>EventeX!</title>
   </head>
@@ -22,7 +22,7 @@
         <a href="{% url homepage %}"><img src="{{ STATIC_URL }}img/logo.svg" alt="EventeX"></a>
       </div>
       {% block top %}
-      {% endblock %}
+      {% endblock top %}
     </div>
     <div class="clear"></div>
     <hr>
@@ -31,11 +31,11 @@
     </div>
     <div id="content">
       {% block content %}
-      {% endblock %}
+      {% endblock content %}
     </div>
     <hr>
     <div id="footer">
-      <p>© 2012. <a rel="license" href="{% url homepage %}">EventeX</a>, some rights reserved. <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><a id="django" href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangosite80x15.gif" border="0" alt="A Django site." title="A Django site." /></a></p>
+      <p>© 2012<a rel="license" href="{% url homepage %}">EventeX</a>, some rights reserved. <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><a id="django" href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangosite80x15.gif" border="0" alt="A Django site." title="A Django site." /></a></p>
     </div>
   </div>
   </body>
