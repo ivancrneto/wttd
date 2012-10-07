@@ -13,8 +13,8 @@ class Subscription(models.Model):
 
     class Meta:
         ordering = ['created_at']
-        verbose_name = _('Inscricao')
-        verbose_name_plural = _('Inscricoes')
+        verbose_name = _('Inscrição')
+        verbose_name_plural = _('Inscrições')
 
     def __unicode__(self):
         return self.name
