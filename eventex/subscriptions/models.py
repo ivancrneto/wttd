@@ -9,11 +9,12 @@ class Subscription(models.Model):
     email = models.EmailField(_('Email'), unique=True)
     phone = models.CharField(_('Telefone'), max_length=20, blank=True)
     created_at = models.DateTimeField(_('Criado em'), auto_now_add=True)
+    paid = models.BooleanField(_('Pago'))
 
     class Meta:
         ordering = ['created_at']
-        verbose_name = _('Inscrição')
-        verbose_name_plural = _('Inscrições')
+        verbose_name = _('Inscricao')
+        verbose_name_plural = _('Inscricoes')
 
     def __unicode__(self):
         return self.name

@@ -1,13 +1,14 @@
 # coding: utf-8
 from django.test import TestCase
 from eventex.subscriptions.models import Subscription
+from django.core.urlresolvers import reverse as r
 
 
 class SuccessTest(TestCase):
     def setUp(self):
         s = Subscription.objects.create(name='Ivan Rocha', cpf='12345678901',
             email='ivan.cr.neto@gmail.com', phone='8487598888')
-        self.resp = self.client.get('/inscricao/%d/' % s.pk)
+        self.resp = self.client.get(r('subscriptions:success', args=[s.pk]))
 
     def test_get(self):
         'GET /inscricao/1/ should return 200.'
@@ -29,5 +30,5 @@ class SuccessTest(TestCase):
 
 class SuccessViewNotFound(TestCase):
     def test_not_found(self):
-        response = self.client.get('/inscricao/0/')
+        response = self.client.get(r('subscriptions:success', args=[0]))
         self.assertEqual(404, response.status_code)
