@@ -2,6 +2,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
+from django.core.validators import EMPTY_VALUES
 from .models import Subscription
 
 
@@ -37,14 +38,16 @@ class PhoneField(forms.MultiValueField):
         if not data_list:
             return ''
         if data_list[0] in EMPTY_VALUES:
-            raise forms.ValidationError(_(u'DDD inválido'))
+            raise forms.ValidationError(_(u'DDD inválido.'))
         if data_list[1] in EMPTY_VALUES:
-            raise forms.ValidationError(_(u'Número inválido'))
+            raise forms.ValidationError(_(u'Número inválido.'))
 
         return '%s-%s' % tuple(data_list)
 
 
 class SubscriptionForm(forms.ModelForm):
+    phone = PhoneField(label=_('Telefone'), required=False)
+
     class Meta:
         model = Subscription
         exclude = ('paid',)
@@ -65,6 +68,6 @@ class SubscriptionForm(forms.ModelForm):
 
         if not self.cleaned_data.get('email') and \
                 not self.cleaned_data.get('phone'):
-            raise ValidationError(_(u'Informe seu e-mail ou telefone'))
+            raise ValidationError(_(u'Informe seu e-mail ou telefone.'))
 
         return self.cleaned_data
