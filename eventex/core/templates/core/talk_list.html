@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block page-title %}Palestras{% endblock page-title %}
+
+{% block header %}
+  <link type="text/css" href="{{ STATIC_URL }}css/talk.css" rel="stylesheet" media="screen">
+{% endblock header %}
+
 {% block content %}
 	<h3>Manhã</h3>
 	{% for talk in morning_talks %}

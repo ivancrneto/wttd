@@ -4,7 +4,7 @@ from eventex.core.models import Talk
 from django.core.urlresolvers import reverse as r
 
 
-class TalkListTest(TestCase):
+class TalkDetailTest(TestCase):
     def setUp(self):
         t = Talk.objects.create(description=u'Descrição da palestra',
             title='Título da palestra', start_time='10:00')
@@ -26,3 +26,8 @@ class TalkListTest(TestCase):
     def test_not_found(self):
         response = self.client.get(r('core:talk_detail', args=[0]))
         self.assertEqual(404, response.status_code)
+
+    def test_html(self):
+        self.assertContains(self.resp, 'Palestra')
+        self.assertContains(self.resp, '/palestrantes/ivan-rocha/')
+        self.assertContains(self.resp, 'Ivan Rocha')

@@ -1,0 +1,9 @@
+#content h3, h4 {
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+#content h5 {
+	font-weight: bold;
+	margin-top: 10px;
+}

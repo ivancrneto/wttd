@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block header %}
+  <link type="text/css" href="{{ STATIC_URL }}css/speaker.css" rel="stylesheet" media="screen">
+{% endblock header %}
+
+{% block page-title %}Palestrantes{% endblock page-title %}
+
 {% block content %}
 	<h4><a href="{{ speaker.url }}">{{ speaker.name }}</a></h4>
 	<p>{{ speaker.description }}</p>

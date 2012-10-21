@@ -13,6 +13,10 @@ class Speaker(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('Palestrante')
+        verbose_name_plural = _('Palestrantes')
+
     @models.permalink
     def get_absolute_url(self):
         return ('core:speaker_detail', (), {'slug': self.slug})
@@ -33,6 +37,10 @@ class Contact(models.Model):
     emails = KindContactManager('E')
     phones = KindContactManager('P')
     faxes = KindContactManager('F')
+
+    class Meta:
+        verbose_name = _('Contato')
+        verbose_name_plural = _('Contatos')
 
     def __unicode__(self):
         return self.value
@@ -56,7 +64,32 @@ class Talk(models.Model):
     def get_absolute_url(self):
         return '/palestras/%d/' % self.pk
 
+    @property
+    def slides(self):
+        return self.media_set.filter(kind='SL')
+
+    @property
+    def videos(self):
+        return self.media_set.filter(kind='YT')
+
 
 class Course(Talk):
     slots = models.IntegerField()
     notes = models.TextField()
+
+    objects = PeriodManager()
+
+
+class Media(models.Model):
+    MEDIAS = (
+        ('YT', _('Youtube')),
+        ('SL', _('SlideShare')),
+    )
+
+    talk = models.ForeignKey('Talk')
+    kind = models.CharField(_('Tipo'), max_length=2, choices=MEDIAS)
+    title = models.CharField(_('Título'), max_length=2)
+    media_id = models.CharField(_('Ref'), max_length=255)
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.talk.title, self.title)
