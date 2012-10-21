@@ -88,7 +88,7 @@ class Media(models.Model):
 
     talk = models.ForeignKey('Talk')
     kind = models.CharField(_('Tipo'), max_length=2, choices=MEDIAS)
-    title = models.CharField(_('Título'), max_length=2)
+    title = models.CharField(_('Título'), max_length=200)
     media_id = models.CharField(_('Ref'), max_length=255)
 
     def __unicode__(self):
